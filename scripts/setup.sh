@@ -9,7 +9,7 @@ create_build_dirs() {
 
 cleanup_build_dirs() {
   rm -rf bin build
-  echo "Directories 'bin' and 'build' have been deleted"
+  echo "Directories 'bin' and 'build' have been deleted."
 }
 
 if [[ "$1" == '-d' ]]; then

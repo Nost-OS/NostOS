@@ -2,6 +2,7 @@
 include scripts/Makefile.perl
 
 BIN_DIR = ./bin
+SRC_DIR = ./src
 
 PERL_SCRIPT = ./scripts/check_dependencies.pl
 
@@ -19,7 +20,9 @@ check_dependencies: check_perl
 
 build:
 	@echo "Building project..."
-	$(ASM) ./boot.asm -f bin -o $(BIN_DIR)/boot.bin
+	$(ASM) $(SRC_DIR)/boot.asm -f bin -o $(BIN_DIR)/boot.bin
+	dd if=./message.txt >> $(BIN_DIR)/boot.bin
+	dd if=/dev/zero bs=512 count=1 >> ./$(BIN_DIR)/boot.bin
 	@echo "Build complete.\n"
 
 clean:
