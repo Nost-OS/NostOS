@@ -1,5 +1,5 @@
 # Include helper Makefiles
-include scripts/Makefile.perl
+include scripts/Makefile.perl.mk
 
 BIN_DIR = ./bin
 SRC_DIR = ./src
