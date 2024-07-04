@@ -5,7 +5,9 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o
+FILES = ./build/kernel.asm.o ./build/kernel.o
+INCLUDES = -I./src
+FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
 PERL_SCRIPT = ./scripts/check_dependencies.pl
 
@@ -34,7 +36,7 @@ build: $(BIN_DIR)/boot.bin $(BIN_DIR)/kernel.bin
 $(BIN_DIR)/kernel.bin: $(FILES)
 	@echo "Building kernel.bin..."
 	$(LD) -g -relocatable $(FILES) -o $(BUILD_DIR)/kernelfull.o
-	$(CC) -T $(SRC_DIR)/linker.ld -o $(BIN_DIR)/kernel.bin -ffreestanding -O0 -nostdlib $(BUILD_DIR)/kernelfull.o
+	$(CC) $(FLAGS) -T $(SRC_DIR)/linker.ld -o $(BIN_DIR)/kernel.bin -ffreestanding -O0 -nostdlib $(BUILD_DIR)/kernelfull.o
 
 $(BIN_DIR)/boot.bin: $(SRC_DIR)/boot/boot.asm
 	@echo "Building boot.bin..."
@@ -43,6 +45,9 @@ $(BIN_DIR)/boot.bin: $(SRC_DIR)/boot/boot.asm
 $(BUILD_DIR)/kernel.asm.o: $(SRC_DIR)/kernel.asm
 	@echo "Building kernel.asm.o..."
 	$(ASM) -f elf -g $(SRC_DIR)/kernel.asm -o $(BUILD_DIR)/kernel.asm.o
+
+$(BUILD_DIR)/kernel.o: $(SRC_DIR)/kernel.c
+	$(CC) $(INCLUDES) $(FLAGS) -std=gnu99 -c $(SRC_DIR)/kernel.c -o $(BUILD_DIR)/kernel.o
 
 clean:
 	@echo "Cleaning build files..."
