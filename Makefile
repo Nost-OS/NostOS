@@ -5,7 +5,7 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -60,6 +60,9 @@ $(BUILD_DIR)/idt/idt.o: $(SRC_DIR)/idt/idt.c
 
 $(BUILD_DIR)/memory/memory.o: $(SRC_DIR)/memory/memory.c
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/memory $(FLAGS) -std=gnu99 -c $(SRC_DIR)/memory/memory.c -o $(BUILD_DIR)/memory/memory.o
+
+$(BUILD_DIR)/io/io.o: $(SRC_DIR)/io/io.c
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/io $(FLAGS) -std=gnu99 -c $(SRC_DIR)/io/io.c -o $(BUILD_DIR)/io/io.o
 
 clean:
 	@echo "Cleaning build files..."

@@ -7,6 +7,7 @@ create_build_dirs() {
   mkdir build/display
   mkdir build/memory
   mkdir build/idt
+  mkdir build/io
   echo "Directories 'bin' and 'build' are prepared."
 }
 
