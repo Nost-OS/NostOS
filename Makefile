@@ -5,7 +5,7 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -21,7 +21,7 @@ CC = i686-elf-gcc
 all: check_dependencies build
 
 check_dependencies: check_perl
-	@echo "\nChecking dependencies and tools..."
+	@echo "Checking dependencies and tools..."
 	$(PERL) $(PERL_SCRIPT)
 	@echo "Dependency check complete.\n"
 
@@ -31,7 +31,7 @@ build: $(BIN_DIR)/boot.bin $(BIN_DIR)/kernel.bin
 	dd if=$(BIN_DIR)/boot.bin >> $(BIN_DIR)/os.bin
 	dd if=$(BIN_DIR)/kernel.bin >> $(BIN_DIR)/os.bin
 	dd if=/dev/zero bs=512 count=100 >> $(BIN_DIR)/os.bin
-	@echo "Build complete.\n"
+	@echo "Build complete."
 
 $(BIN_DIR)/kernel.bin: $(FILES)
 	@echo "Building kernel.bin..."
@@ -51,6 +51,15 @@ $(BUILD_DIR)/kernel.o: $(SRC_DIR)/kernel.c
 
 $(BUILD_DIR)/display/display.o: $(SRC_DIR)/display/display.c
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/display $(FLAGS) -std=gnu99 -c $(SRC_DIR)/display/display.c -o $(BUILD_DIR)/display/display.o
+
+$(BUILD_DIR)/idt/idt.asm.o: $(SRC_DIR)/idt/idt.asm
+	$(ASM) -f elf -g $(SRC_DIR)/idt/idt.asm -o $(BUILD_DIR)/idt/idt.asm.o
+
+$(BUILD_DIR)/idt/idt.o: $(SRC_DIR)/idt/idt.c
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/idt $(FLAGS) -std=gnu99 -c $(SRC_DIR)/idt/idt.c -o $(BUILD_DIR)/idt/idt.o
+
+$(BUILD_DIR)/memory/memory.o: $(SRC_DIR)/memory/memory.c
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/memory $(FLAGS) -std=gnu99 -c $(SRC_DIR)/memory/memory.c -o $(BUILD_DIR)/memory/memory.o
 
 clean:
 	@echo "Cleaning build files..."

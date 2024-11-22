@@ -3,4 +3,6 @@
 
 void kernel_main();
 
+void panic();
+
 #endif
