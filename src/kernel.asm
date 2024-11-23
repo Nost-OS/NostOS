@@ -22,8 +22,48 @@ _start:
   or al, 2
   out 0x92, al
 
+  ; Disable interrupts
+  cli
+
+  call setup_pic
+
+  ; Enable interrupts
+  sti
+
   call kernel_main
 
   jmp $
+
+setup_pic:
+  ; Remap the master PIC
+  mov al, 00010001b
+  out 0x20, al ; Tell master PIC
+
+  mov al, 0x20 ; Interrupt 0x20 in where the master PIC should start
+  out 0x21, al
+
+  mov al, 00000001b
+  out 0x21, al
+  ; End remap of the master PIC
+
+  ; Remap the slave PIC
+  mov al, 00010001b
+  out 0xA0, al
+
+  mov al, 0x28
+  out 0xA1, al
+
+  ; Tell the master PIC about the slave PIC
+  mov al, 00000100b
+  out 0x21, al
+  mov al, 00000010b
+  out 0xA1, al
+
+  ; Set PICS to 8086 mode
+  mov al, 00000001b
+  out 0x21, al
+  out 0xA1, al
+
+  ret
 
 times 512-($ - $$) db 0
