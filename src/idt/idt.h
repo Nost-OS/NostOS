@@ -18,6 +18,9 @@ struct idtr_desc
   uint32_t base; // Base address of the start of the interrupt descriptor table
 } __attribute__((packed));
 
+void enable_interrupts();
+void disable_interrupts();
+
 void idt_init();
 
 #endif

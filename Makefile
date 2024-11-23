@@ -47,21 +47,27 @@ $(BUILD_DIR)/kernel.asm.o: $(SRC_DIR)/kernel.asm
 	$(ASM) -f elf -g $(SRC_DIR)/kernel.asm -o $(BUILD_DIR)/kernel.asm.o
 
 $(BUILD_DIR)/kernel.o: $(SRC_DIR)/kernel.c
+	@echo "Building kernel.o..."
 	$(CC) $(INCLUDES) $(FLAGS) -std=gnu99 -c $(SRC_DIR)/kernel.c -o $(BUILD_DIR)/kernel.o
 
 $(BUILD_DIR)/display/display.o: $(SRC_DIR)/display/display.c
+	@echo "Building display.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/display $(FLAGS) -std=gnu99 -c $(SRC_DIR)/display/display.c -o $(BUILD_DIR)/display/display.o
 
 $(BUILD_DIR)/idt/idt.asm.o: $(SRC_DIR)/idt/idt.asm
+	@echo "Building idt.asm.o..."
 	$(ASM) -f elf -g $(SRC_DIR)/idt/idt.asm -o $(BUILD_DIR)/idt/idt.asm.o
 
 $(BUILD_DIR)/idt/idt.o: $(SRC_DIR)/idt/idt.c
+	@echo "Building idt.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/idt $(FLAGS) -std=gnu99 -c $(SRC_DIR)/idt/idt.c -o $(BUILD_DIR)/idt/idt.o
 
 $(BUILD_DIR)/memory/memory.o: $(SRC_DIR)/memory/memory.c
+	@echo "Building memory.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/memory $(FLAGS) -std=gnu99 -c $(SRC_DIR)/memory/memory.c -o $(BUILD_DIR)/memory/memory.o
 
 $(BUILD_DIR)/io/io.o: $(SRC_DIR)/io/io.c
+	@echo "Building io.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/io $(FLAGS) -std=gnu99 -c $(SRC_DIR)/io/io.c -o $(BUILD_DIR)/io/io.o
 
 clean:

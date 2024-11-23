@@ -27,9 +27,6 @@ _start:
 
   call setup_pic
 
-  ; Enable interrupts
-  sti
-
   call kernel_main
 
   jmp $
