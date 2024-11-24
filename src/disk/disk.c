@@ -8,6 +8,7 @@
 struct disk disk;
 
 #define ATA_PRIMARY_IO 0x1F0
+
 // ATA register offsets
 #define ATA_REG_DATA 0x00
 #define ATA_REG_ERROR 0x01
@@ -50,7 +51,7 @@ int disk_read_sector(int lba, int total, void* buf)
     // Copy from hard disk to memory
     for (int i = 0; i < 256; i++)
     {
-      *ptr = insw(0x1F0);
+      *ptr = insw(ATA_PRIMARY_IO + ATA_REG_DATA);
       ptr++;
     }
   }
@@ -66,7 +67,7 @@ void disk_search_and_init()
   disk.sector_size = NOSTOS_SECTOR_SIZE;
 }
 
-struct disk* get_disk(int index)
+struct disk* disk_get(int index)
 {
   if (index != 0)
     return 0;
