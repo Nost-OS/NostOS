@@ -5,7 +5,7 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/io/io.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/io/io.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o ./build/disk/disk.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -85,6 +85,10 @@ $(BUILD_DIR)/memory/paging/paging.asm.o: $(SRC_DIR)/memory/paging/paging.asm
 $(BUILD_DIR)/memory/paging/paging.o: $(SRC_DIR)/memory/paging/paging.c
 	@echo "Building paging.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/memory/paging $(FLAGS) -std=gnu99 -c $(SRC_DIR)/memory/paging/paging.c -o $(BUILD_DIR)/memory/paging/paging.o
+
+$(BUILD_DIR)/disk/disk.o: $(SRC_DIR)/disk/disk.c
+	@echo "Building disk.o..."
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/disk $(FLAGS) -std=gnu99 -c $(SRC_DIR)/disk/disk.c -o $(BUILD_DIR)/disk/disk.o
 
 clean:
 	@echo "Cleaning build files..."

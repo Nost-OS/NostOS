@@ -1,6 +1,7 @@
 #include "kernel.h"
 
 #include "idt/idt.h"
+#include "disk/disk.h"
 #include "display/display.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
@@ -33,6 +34,10 @@ void kernel_main()
 
   // Enable paging
   enable_paging();
+
+  char buf[512];
+  disk_read_sector(0, 1, buf);
+  print(buf);
 
   // Enable the system interrupts
   enable_interrupts();
