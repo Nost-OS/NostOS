@@ -9,6 +9,7 @@ typedef unsigned int NOSTOS_DISK_TYPE;
 struct disk
 {
   NOSTOS_DISK_TYPE type;
+  unsigned int id;
   int sector_size;
 };
 
