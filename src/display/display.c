@@ -1,5 +1,7 @@
 #include "display.h"
 
+#include <string/string.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -48,24 +50,6 @@ void terminal_initialize()
       terminal_putchar(x, y, ' ', 0);
     }
   }
-}
-
-/**
- * @brief Calculates string length then returns it
- * @attention Should be moved with other string functions later
- * 
- * @param str 
- * @return size_t 
- */
-size_t strlen(const char* str)
-{
-  size_t len = 0;
-  while (str[len])
-  {
-    len++;
-  }
-
-  return len;
 }
 
 void print(const char* str)

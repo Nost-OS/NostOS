@@ -2,6 +2,7 @@
 
 #include "idt/idt.h"
 #include "disk/disk.h"
+#include "fs/pparser.h"
 #include "display/display.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
@@ -40,4 +41,7 @@ void kernel_main()
 
   // Enable the system interrupts
   enable_interrupts();
+
+  struct path_root* root_path = pathparser_parse("0:/bin/shell.elf");
+  if (root_path) {}
 }

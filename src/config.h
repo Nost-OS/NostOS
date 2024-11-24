@@ -15,4 +15,7 @@
 // Disk configuration
 #define NOSTOS_SECTOR_SIZE 512
 
+// Max file path length
+#define NOSTOS_MAX_PATH 108
+
 #endif

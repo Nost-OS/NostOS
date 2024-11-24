@@ -5,7 +5,7 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/disk/disk.o ./build/disk/streamer.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -93,6 +93,14 @@ $(BUILD_DIR)/disk/disk.o: $(SRC_DIR)/disk/disk.c
 $(BUILD_DIR)/disk/streamer.o: $(SRC_DIR)/disk/streamer.c
 	@echo "Building streamer.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/disk $(FLAGS) -std=gnu99 -c $(SRC_DIR)/disk/streamer.c -o $(BUILD_DIR)/disk/streamer.o
+
+$(BUILD_DIR)/string/string.o: $(SRC_DIR)/string/string.c
+	@echo "Building string.o..."
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/string $(FLAGS) -std=gnu99 -c $(SRC_DIR)/string/string.c -o $(BUILD_DIR)/string/string.o
+
+$(BUILD_DIR)/fs/pparser.o: $(SRC_DIR)/fs/pparser.c
+	@echo "Building pparser.o..."
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/fs $(FLAGS) -std=gnu99 -c $(SRC_DIR)/fs/pparser.c -o $(BUILD_DIR)/fs/pparser.o
 
 clean:
 	@echo "Cleaning build files..."
