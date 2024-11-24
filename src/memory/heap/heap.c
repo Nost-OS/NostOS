@@ -114,7 +114,7 @@ void heap_mark_blocks_taken(struct heap* heap, int start_block, uint32_t total_b
 void heap_mark_blocks_free(struct heap* heap, int starting_block)
 {
   struct heap_table* table = heap->table;
-  for (int i = starting_block; i < (int)table->entries; i++)
+  for (int i = starting_block; i < (int)table->total; i++)
   {
     HEAP_BLOCK_TABLE_ENTRY entry = table->entries[i];
     table->entries[i] = HEAP_BLOCK_TABLE_ENTRY_FREE;
