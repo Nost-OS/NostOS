@@ -39,6 +39,26 @@ size_t strnlen(const char* str, int max)
 }
 
 /**
+ * @brief Calculates length of a string until it find a user terminator or the null terminator
+ * 
+ * @param str 
+ * @param max 
+ * @param terminator 
+ * @return int 
+ */
+int strlen_terminator(const char* str, int max, char terminator)
+{
+  int i = 0;
+  for (i = 0; i < max; i++)
+  {
+    if (str[i] == '\0' || str[i] == terminator)
+      break;
+  }
+
+  return i;
+}
+
+/**
  * @brief Copies string from source to destination and adds null termination at end of dest
  * 
  * @param dest 
@@ -61,6 +81,60 @@ char* strcpy(char* dest, const char* src)
   return res;
 }
 
+/**
+ * @brief Compares two string with a max length
+ * 
+ * @param str1 
+ * @param str2 
+ * @param n 
+ * @return int 
+ */
+int strncmp(const char* str1, const char* str2, int n)
+{
+  unsigned char u1, u2;
+
+  while (n-- > 0)
+  {
+    u1 = (unsigned char)*str1++;
+    u2 = (unsigned char)*str2++;
+    
+    if (u1 != u2)
+      return u1 - u2;
+
+    if (u1 == '\0')
+      return 0;
+  }
+
+  return 0;
+}
+
+/**
+ * @brief Compares two string with a max length but case unsensitive
+ * 
+ * @param str1 
+ * @param str2 
+ * @param n 
+ * @return int 
+ */
+int istrncmp(const char* str1, const char* str2, int n)
+{
+  unsigned char u1, u2;
+
+  while (n-- > 0)
+  {
+    u1 = (unsigned)*str1++;
+    u2 = (unsigned)*str2++;
+
+    if (u1 != u2 && tolower(u1) != tolower(u2))
+      return u1 - u2;
+
+    if (u1 == '\0')
+      return 0;
+  }
+
+  return 0;
+}
+
 bool isdigit(char c)
 {
   return c >= 48 && c <= 57;
@@ -72,4 +146,14 @@ int tonumericaldigit(char c)
     return -1;
 
   return c - 48;
+}
+
+char tolower(char c)
+{
+  if (c >= 65 && c <= 80)
+  {
+    c += 32;
+  }
+
+  return c;
 }
