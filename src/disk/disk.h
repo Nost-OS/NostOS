@@ -11,10 +11,15 @@ typedef unsigned int NOSTOS_DISK_TYPE;
 struct disk
 {
   NOSTOS_DISK_TYPE type;
-  unsigned int id;
   int sector_size;
 
+  // The id of the disk
+  unsigned int id;
+
   struct filesystem* filesystem;
+
+  // The private data of out filesystem
+  void* fs_private;
 };
 
 void disk_search_and_init();
