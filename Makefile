@@ -31,6 +31,13 @@ build: $(BIN_DIR)/boot.bin $(BIN_DIR)/kernel.bin
 	dd if=$(BIN_DIR)/boot.bin >> $(BIN_DIR)/os.bin
 	dd if=$(BIN_DIR)/kernel.bin >> $(BIN_DIR)/os.bin
 	dd if=/dev/zero bs=1048576 count=16 >> $(BIN_DIR)/os.bin
+
+	@echo "Mounting point for filesystem..."
+	sudo mount -t vfat ./bin/os.bin /mnt/n
+	# Copy a file over
+	sudo cp ./misc/hello.txt /mnt/n
+	sudo umount /mnt/n
+
 	@echo "Build complete."
 
 $(BIN_DIR)/kernel.bin: $(FILES)
