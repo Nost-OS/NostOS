@@ -1,6 +1,8 @@
 #ifndef _NOSTOS_DISK_H
 #define _NOSTOS_DISK_H
 
+#include <fs/file.h>
+
 typedef unsigned int NOSTOS_DISK_TYPE;
 
 // Represents a real physical disk
@@ -11,6 +13,8 @@ struct disk
   NOSTOS_DISK_TYPE type;
   unsigned int id;
   int sector_size;
+
+  struct filesystem* filesystem;
 };
 
 void disk_search_and_init();

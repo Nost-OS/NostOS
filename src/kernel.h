@@ -3,6 +3,6 @@
 
 void kernel_main();
 
-void panic();
+void panic(const char* msg);
 
 #endif

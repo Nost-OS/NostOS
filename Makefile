@@ -5,7 +5,7 @@ SRC_DIR = ./src
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/pparser.o ./build/fs/file.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.asm.o ./build/memory/paging/paging.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
@@ -108,6 +108,10 @@ $(BUILD_DIR)/string/string.o: $(SRC_DIR)/string/string.c
 $(BUILD_DIR)/fs/pparser.o: $(SRC_DIR)/fs/pparser.c
 	@echo "Building pparser.o..."
 	$(CC) $(INCLUDES) -I$(SRC_DIR)/fs $(FLAGS) -std=gnu99 -c $(SRC_DIR)/fs/pparser.c -o $(BUILD_DIR)/fs/pparser.o
+
+$(BUILD_DIR)/fs/file.o: $(SRC_DIR)/fs/file.c
+	@echo "Building file.o..."
+	$(CC) $(INCLUDES) -I$(SRC_DIR)/fs $(FLAGS) -std=gnu99 -c $(SRC_DIR)/fs/file.c -o $(BUILD_DIR)/fs/file.o
 
 clean:
 	@echo "Cleaning build files..."

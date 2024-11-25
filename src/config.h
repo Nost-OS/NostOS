@@ -18,4 +18,8 @@
 // Max file path length
 #define NOSTOS_MAX_PATH 108
 
+// NOSTOS File System configuration
+#define NOSTOS_MAX_FILESYSTEMS 12
+#define NOSTOS_MAX_FILE_DESCRIPTORS 512
+
 #endif
