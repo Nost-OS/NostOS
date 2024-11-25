@@ -3,6 +3,7 @@
 #include "idt/idt.h"
 #include "disk/disk.h"
 #include "fs/pparser.h"
+#include "fs/fat/fat16.h"
 #include "display/display.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
@@ -23,6 +24,9 @@ void kernel_main()
 
   // Initialize heap
   kheap_init();
+
+  // Initialize filesystem
+  fs_init();
 
   // Search and initialize the disks
   disk_search_and_init();

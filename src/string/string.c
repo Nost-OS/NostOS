@@ -38,6 +38,29 @@ size_t strnlen(const char* str, int max)
   return len;
 }
 
+/**
+ * @brief Copies string from source to destination and adds null termination at end of dest
+ * 
+ * @param dest 
+ * @param src 
+ * @return char* 
+ */
+char* strcpy(char* dest, const char* src)
+{
+  char* res = dest;
+
+  while (*src != 0)
+  {
+    *dest = *src;
+    src += 1;
+    dest += 1;
+  }
+
+  *dest = 0x00;
+  
+  return res;
+}
+
 bool isdigit(char c)
 {
   return c >= 48 && c <= 57;

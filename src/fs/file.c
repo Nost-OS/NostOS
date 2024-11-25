@@ -1,4 +1,5 @@
 #include "file.h"
+#include "fat/fat16.h"
 
 #include <types.h>
 #include <config.h>
@@ -27,7 +28,7 @@ static struct filesystem** fs_get_free_filesystem()
 
 static void fs_static_load()
 {
-  // fs_inser_filesystem(fat16_init());
+  fs_insert_filesystem(fat16_init());
 }
 
 static int file_new_descriptor(struct file_descriptor** desc_out)

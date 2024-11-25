@@ -13,6 +13,7 @@ create_build_dirs() {
   mkdir build/disk
   mkdir build/string
   mkdir build/fs
+  mkdir build/fs/fat
   echo "Directories 'bin' and 'build' are prepared."
 }
 
