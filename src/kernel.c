@@ -3,7 +3,7 @@
 #include "idt/idt.h"
 #include "disk/disk.h"
 #include "fs/pparser.h"
-#include "fs/fat/fat16.h"
+#include "fs/file.h"
 #include "display/display.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
