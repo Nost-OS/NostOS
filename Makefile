@@ -30,7 +30,7 @@ build: $(BIN_DIR)/boot.bin $(BIN_DIR)/kernel.bin
 	rm -rf $(BIN_DIR)/os.bin
 	dd if=$(BIN_DIR)/boot.bin >> $(BIN_DIR)/os.bin
 	dd if=$(BIN_DIR)/kernel.bin >> $(BIN_DIR)/os.bin
-	dd if=/dev/zero bs=512 count=100 >> $(BIN_DIR)/os.bin
+	dd if=/dev/zero bs=1048576 count=16 >> $(BIN_DIR)/os.bin
 	@echo "Build complete."
 
 $(BIN_DIR)/kernel.bin: $(FILES)
